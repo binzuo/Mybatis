@@ -1,3 +1,4 @@
+                    <%--index page--%>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -14,10 +15,13 @@
   <h1>index page</h1>
   <hr>
   <a href="signup.jsp">sign up</a>
+  ${sessionScope.congratulation}
   <form action="/user" method="post">
     <input type="hidden" name="action" value="login">
-    <input type="text" name="username" placeholder="USERNAME" value="18310996173@gmail.com">username<br>
+    <input type="text" name="username" placeholder="USERNAME" value="左彬">username<br>
     <input type="password" name="password" placeholder="PASSWORD" value="123">password<br>
     <input type="submit" value="login">
+  </form>
+  ${sessionScope.warning}
   </body>
 </html>

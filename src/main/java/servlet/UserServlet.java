@@ -1,24 +1,17 @@
 package servlet;
+//项目包>src>main>java>创建的servlet>用户注册登录类 UserServlet
 
-import Model.*;
-import com.sun.deploy.nativesandbox.comm.Request;
-import com.sun.net.httpserver.HttpServer;
 import org.apache.ibatis.session.SqlSession;
 import util.MyBatisSession;
 
 
-import javax.jws.WebService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.registry.JAXRException;
-import javax.xml.registry.LifeCycleManager;
-import javax.xml.registry.infomodel.*;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -33,8 +26,12 @@ public class UserServlet extends HttpServlet {
         if (action.equals("register")) {
             register(req, resp);
         }
+
         if (action.equals("login")) {
-            login(req, resp);
+            login(req,resp);
+        }
+        if (action.equals("logout")) {
+            logout(req, resp);
         }
 
 
@@ -48,6 +45,7 @@ public class UserServlet extends HttpServlet {
         }
         try {
             resp.sendRedirect("index.jsp");
+            req.getSession().setAttribute("congratulation","恭喜您注册成功!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,19 +57,34 @@ public class UserServlet extends HttpServlet {
         try (SqlSession sqlSession = MyBatisSession.getSqlSession(true)) {
             List<Model.User> users=sqlSession.selectList("user.login",new Model.User(null,username,password));
             if (users.size()>0){
-
+                try {
+                    resp.sendRedirect("home.jsp");
+                    req.getSession().setAttribute("username",username);
+                    req.getSession().setAttribute("welcome","欢迎您:"+username);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }else {
+                try {
+                    resp.sendRedirect("index.jsp");
+                    req.getSession().setAttribute("warning","您输入的账号或密码不正确!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
-        }
-        try {
-            resp.sendRedirect("home.jsp");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
 
+    private void logout(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            req.getSession().invalidate();
+            resp.sendRedirect("index.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
