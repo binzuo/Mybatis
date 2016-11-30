@@ -12,10 +12,17 @@
 <html>
 <head>
     <title>home page</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        @import url(home.css);
+    </style>
+    <script src="jQuery/jquery-3.1.1.js"></script>
+    <script>
+    </script>
 </head>
 <body>
 <%--在地址栏里直接输入localhost:8080/home.jsp不能直接访问主页 --%>
-<c:if test="${sessionScope.username eq null}">
+<c:if test="${sessionScope.email eq null}">
     <c:redirect url="index.jsp"/>
 </c:if>
 
@@ -30,7 +37,26 @@ ${sessionScope.welcome}
 <h1>南无日光遍照菩萨</h1>
 <h1>南无坚净信菩萨摩诃萨</h1>
 <hr>
+<h2>书单</h2>
+<table border="1" cellspacing="0" cellpadding="10" >
+    <tr>
+        <th>书名</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th colspan="2">操作</th>
+    </tr>
+    <tr>
+        <td>《地藏菩萨本愿经》</td>
+        <td>唐于阗国三藏实叉难陀译</td>
+        <td>佛家</td>
+        <td>修改</td>
+        <td>删除</td>
+    </tr>
+</table>
+
+<hr>
 <a href="/user?action=logout">log out</a>
+
 
 </body>
 </html>

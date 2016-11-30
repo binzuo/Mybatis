@@ -12,7 +12,7 @@ public class Userservice {
     // create record by XML configuration
     private static int createUserViaXML() {//推荐使用
         try (SqlSession sqlSession = MyBatisSession.getSqlSession(true)) {
-            return sqlSession.insert("user.create", new Model.User(null,"Tester2","password2"));
+            return sqlSession.insert("user.create", new Model.User(null,"email","password"));
         }
     }
 

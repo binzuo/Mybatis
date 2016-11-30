@@ -38,10 +38,10 @@ public class UserServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest req, HttpServletResponse resp) {
-        String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
         try (SqlSession sqlSession = MyBatisSession.getSqlSession(true)) {
-            sqlSession.insert("user.create",new Model.User(null,username,password));
+            sqlSession.insert("user.create",new Model.User(null,email,password));
         }
         try {
             resp.sendRedirect("index.jsp");
@@ -52,15 +52,15 @@ public class UserServlet extends HttpServlet {
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) {
-        String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
         try (SqlSession sqlSession = MyBatisSession.getSqlSession(true)) {
-            List<Model.User> users=sqlSession.selectList("user.login",new Model.User(null,username,password));
+            List<Model.User> users=sqlSession.selectList("user.login",new Model.User(null,email,password));
             if (users.size()>0){
                 try {
                     resp.sendRedirect("home.jsp");
-                    req.getSession().setAttribute("username",username);
-                    req.getSession().setAttribute("welcome","欢迎您:"+username);
+                    req.getSession().setAttribute("email",email);
+                    req.getSession().setAttribute("welcome","欢迎您:"+email);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -4,9 +4,19 @@ CREATE DATABASE IF NOT EXISTS test;
 DROP TABLE IF EXISTS test.user;
 CREATE TABLE test.user (
  id       INT AUTO_INCREMENT PRIMARY KEY,
- username VARCHAR(255),
+ email VARCHAR(255),
  password VARCHAR(255)
+);
+#book
+DROP TABLE IF EXISTS test.book;
+CREATE TABLE test.book(
+ id INT AUTO_INCREMENT PRIMARY KEY ,
+ bookTitle VARCHAR(255),
+ author VARCHAR(255),
+ publishing VARCHAR(255)
 );
 
 SELECT *
 FROM test.user;
+SELECT *
+FROM test.book;

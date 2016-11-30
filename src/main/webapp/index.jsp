@@ -18,8 +18,8 @@
   ${sessionScope.congratulation}
   <form action="/user" method="post">
     <input type="hidden" name="action" value="login">
-    <input type="text" name="username" placeholder="USERNAME" value="左彬">username<br>
-    <input type="password" name="password" placeholder="PASSWORD" value="123">password<br>
+    <input type="text" name="email" placeholder="邮箱" value="18310996173xiaozuo@gmail.com"><br>
+    <input type="password" name="password" placeholder="PASSWORD" value="123"><br>
     <input type="submit" value="login">
   </form>
   ${sessionScope.warning}
