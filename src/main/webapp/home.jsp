@@ -37,25 +37,39 @@ ${sessionScope.welcome}
 <h1>南无日光遍照菩萨</h1>
 <h1>南无坚净信菩萨摩诃萨</h1>
 <hr>
+<form action="${ctx}/book" method="post">
+    <input type="hidden" name="action" value="add">
+    <input type="text" name="bookTitle" placeholder="书名"><br>
+    <input type="text" name="author" placeholder="作者"><br>
+    <input type="text" name="publishing" placeholder="出版社"><br>
+    <input type="submit" value="ADD">
+</form>
+<hr>
 <h2>书单</h2>
 <table border="1" cellspacing="0" cellpadding="10" >
     <tr>
+        <th>序号</th>
         <th>书名</th>
         <th>作者</th>
         <th>出版社</th>
         <th colspan="2">操作</th>
     </tr>
-    <tr>
-        <td>《地藏菩萨本愿经》</td>
-        <td>唐于阗国三藏实叉难陀译</td>
-        <td>佛家</td>
-        <td>修改</td>
-        <td>删除</td>
-    </tr>
+    <c:forEach var="book" items="${sessionScope.book}" varStatus="vs">
+        <tr>
+            <td>${vs.count}</td>
+            <td>${book.bookTitle}</td>
+            <td>${book.author}</td>
+            <td>${book.publishing}</td>
+            <td><a href="${ctx}/book?action=search&id=${book.id}">修改</a></td>
+            <td><a href="${ctx}/book?action=remove&id=${book.id}">删除</a></td>
+        </tr>
+    </c:forEach>
+
 </table>
 
+
 <hr>
-<a href="/user?action=logout">log out</a>
+<a href="${ctx}/user?action=logout">log out</a>
 
 
 </body>
