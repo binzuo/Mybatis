@@ -14,10 +14,11 @@
 <body>
 <form action="${ctx}/book" method="post">
     <input type="hidden" name="action" value="update">
-    <input type="text" name="bookTitle" placeholder="书名"><br>
-    <input type="text" name="author" placeholder="作者"><br>
-    <input type="text" name="publishing" placeholder="出版社"><br>
-    <input type="submit" value="save">
+    <input type="hidden" name="id" value="${sessionScope.book.id}">
+    <input type="text" name="bookTitle" placeholder="BOOKTITLE" value="${sessionScope.book.bookTitle}"><br>
+    <input type="text" name="author" placeholder="AUTHOR" value="${sessionScope.book.author}"><br>
+    <input type="text" name="publishing" placeholder="PUBLISHING" value="${sessionScope.book.publishing}"><br>
+    <input type="submit" value="SAVE">
 </form>
 </body>
 </html>

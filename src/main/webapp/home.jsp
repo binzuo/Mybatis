@@ -54,7 +54,7 @@ ${sessionScope.welcome}
         <th>出版社</th>
         <th colspan="2">操作</th>
     </tr>
-    <c:forEach var="book" items="${sessionScope.book}" varStatus="vs">
+    <c:forEach var="book" items="${sessionScope.books}" varStatus="vs">
         <tr>
             <td>${vs.count}</td>
             <td>${book.bookTitle}</td>
