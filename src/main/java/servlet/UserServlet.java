@@ -58,7 +58,7 @@ public class UserServlet extends HttpServlet {
             List<Model.User> users=sqlSession.selectList("user.login",new Model.User(null,email,password));
             if (users.size()>0){
                 try {
-                    resp.sendRedirect("home.jsp");
+                    resp.sendRedirect("/book?action=query");
                     req.getSession().setAttribute("email",email);
                     req.getSession().setAttribute("welcome","欢迎您:"+email);
                 } catch (IOException e) {
